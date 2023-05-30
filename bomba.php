@@ -14,5 +14,6 @@ $fin = fopen("php://stdin", "r");
     }
     
     echo "BOOOMM!!!";
+    echo PHP_EOL;
    
 ?>
