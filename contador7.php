@@ -4,13 +4,12 @@ Incluir pergunta de quantos numeros deseja inserir
 */
      $fin = fopen("php://stdin", "r");
      $array = array();
-     
-     
+     $repetidos = array();
     
     do {
           echo PHP_EOL;
           echo "Escolha uma opção: ";
-          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[0]Sair\n";
+          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[0]Sair\n";
           echo "Opcao n: ";
           $opcao = fgets($fin);
           switch ($opcao) {
@@ -98,8 +97,6 @@ Incluir pergunta de quantos numeros deseja inserir
                     break;
 
                case 7:
-                    /*$somaArray = array_sum($array);
-                    echo "A soma dos valores do Array é: ".$somaArray;*/
                     $indice = 0;
                     $soma = 0;
                     while ($indice < count($array)){
@@ -135,8 +132,36 @@ Incluir pergunta de quantos numeros deseja inserir
                     echo "O menor valor dentro do Array é: ".$menorValor;
                     echo PHP_EOL;
                     break;
-           
-                    
+                              
+               case 10:
+                    $valorinvert[] = $array[0];
+                    $valorinvert[] = $array[1];
+                    $array[0] = $valorinvert[1];
+                    $array[1] = $valorinvert[0];
+                    echo "Posição 1 e 2 invertidos!";
+                    break;
+
+               case 11:
+                    $indice = 0;
+                    $valorposicao = 0;
+                    while($indice < count($array)){
+                         $intind = $indice;
+                         while($intind < count($array)){
+                              $valorposicao = $array[$intind];
+                              while($intind < count($array)-1){
+                                   $intind++;
+                                   if($valorposicao == $array[$intind]){
+                                        $intind++;
+                                        echo "Valor $valorposicao --- repetido na posição: $intind\n";
+                                        $intind--;
+                                   }
+                              }
+                              $intind++;
+                         }     
+                         $indice++;
+                    }
+                    break;
+
                case 0:
                     echo "Até logo.";
                     echo PHP_EOL;
