@@ -142,23 +142,18 @@ Incluir pergunta de quantos numeros deseja inserir
                     break;
 
                case 11:
-                    $indice = 0;
-                    $valorposicao = 0;
-                    while($indice < count($array)){
-                         $intind = $indice;
-                         while($intind < count($array)){
-                              $valorposicao = $array[$intind];
-                              while($intind < count($array)-1){
-                                   $intind++;
-                                   if($valorposicao == $array[$intind]){
-                                        $intind++;
-                                        echo "Valor $valorposicao --- repetido na posição: $intind\n";
-                                        $intind--;
-                                   }
+                    $indice1 = 0;
+                    while($indice1 < count($array)-1){
+                         $indice2 = $indice1 +1;
+                         while($indice2 < count($array)){
+                              if($array[$indice2] == $array[$indice1]){
+                                   $valor = $array[$indice2];
+                                   $posicao = $indice2 +1;
+                                   echo "Valor $valor --- repetido na posição: $posicao\n";
                               }
-                              $intind++;
-                         }     
-                         $indice++;
+                              $indice2++;
+                         }
+                         $indice1++;
                     }
                     break;
 
