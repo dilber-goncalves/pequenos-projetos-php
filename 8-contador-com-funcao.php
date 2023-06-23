@@ -2,27 +2,25 @@
 
      $fin = fopen("php://stdin", "r");
      $array = array();
-     $valorinvert = array();
 
-     function ler_input($texto){
+     function ler_input($texto, $fin){
           echo $texto;
-          $fin = fopen("php://stdin", "r");
+          global $fin;
           $input = fgets($fin);
           $input = rtrim($input, "\n\r");
-          fclose($fin);
           return $input;
      }
     
     do {
           echo PHP_EOL;
           echo "Escolha uma opção: ";
-          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[0]Sair\n";
+          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[0]Sair\n";
           echo PHP_EOL;
           echo "Opcao n: ";
           $opcao = fgets($fin);
           switch ($opcao) {
                case 1:
-                    $qtnum = ler_input ("Quantos numeros deseja criar?: ");
+                    $qtnum = ler_input ("Quantos numeros deseja criar?: ", $fin);
                     $qtJaAdd = 0;
                     while ($qtnum != $qtJaAdd) {
                          $rand = rand(1,100);
@@ -48,7 +46,7 @@
                     break;
                
                case 3: 
-                    $indRemove = ler_input("Qual posição do item que deseja remover?: ");
+                    $indRemove = ler_input("Qual posição do item que deseja remover?: ", $fin);
                     $indRemove--;
                     unset($array[$indRemove]);
                     $array = array_values($array);
@@ -57,15 +55,15 @@
                     break;   
 
                case 4:
-                    $altInd = ler_input("Qual posição deseja alterar?: ");
+                    $altInd = ler_input("Qual posição deseja alterar?: ", $fin);
                     $altInd--;
-                    $valorAlterado = ler_input("Qual o novo valor a ser inserido?: ");
+                    $valorAlterado = ler_input("Qual o novo valor a ser inserido?: ", $fin);
                     $array[$altInd] = "$valorAlterado";
                     echo "Valor alterado com sucesso!\n";
                     break;
 
                case 5:
-                    $valorProc = ler_input("Qual valor deseja encontrar?: ");
+                    $valorProc = ler_input("Qual valor deseja encontrar?: ", $fin);
                     $indice = 0;
                     while($indice < count($array)){
                          if($array[$indice]==$valorProc){
@@ -131,10 +129,9 @@
                     break;
                               
                case 10:
-                    $valorinvert[] = $array[0];
-                    $valorinvert[] = $array[1];
-                    $array[0] = $valorinvert[1];
-                    $array[1] = $valorinvert[0];
+                    $aux = $array[0];
+                    $array[0] = $array[1];
+                    $array[1] = $aux;
                     echo "Posição 1 e 2 invertidos!";
                     echo PHP_EOL;
                     break;
@@ -153,6 +150,23 @@
                          }
                          $indice1++;
                     }
+                    break;
+
+               case 12:
+                    $ind1 = 0;
+                    while ($ind1 < count($array)-1){
+                         $ind2 = $ind1 +1;
+                         while ($ind2 < count($array)){
+                              if($array[$ind2] < $array[$ind1]){
+                                   $aux2 = $array[$ind2];
+                                   $array[$ind2] = $array[$ind1];
+                                   $array[$ind1] = $aux2;
+                              }
+                              $ind2++;
+                         }
+                         $ind1++;
+                    }
+                    echo "Valores ordenados!\n";
                     break;
 
                case 0:
