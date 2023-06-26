@@ -10,6 +10,37 @@
           $input = rtrim($input, "\n\r");
           return $input;
      }
+
+     function exibirArray($array){
+          $indice = 0;
+          if (count($array)>0) { 
+               echo "Numeros no array: ";
+               while ($indice < count($array)) {
+                    echo $array[$indice]." ";
+                    $indice ++;
+               } 
+          }
+          else {
+               echo "Voce nao possui numeros informados!";
+          }
+     }
+
+     function swap($array, $ind1, $ind2){
+          while ($ind1 < count($array)-1){
+               $ind2 = $ind1 +1;
+               while ($ind2 < count($array)){
+                    if($array[$ind2] < $array[$ind1]){
+                         $aux2 = $array[$ind2];
+                         $array[$ind2] = $array[$ind1];
+                         $array[$ind1] = $aux2;
+                    }
+                    $ind2++;
+               }
+               $ind1++;
+          }
+          return $array;
+          echo "Valores ordenados!\n";
+     }
     
     do {
           echo PHP_EOL;
@@ -31,17 +62,7 @@
                     break;
 
                case 2:
-                    $indice = 0;
-                    if (count($array)>0) { 
-                         echo "Numeros no array: ";
-                         while ($indice < count($array)) {
-                              echo $array[$indice]." ";
-                              $indice ++;
-                         } 
-                    }
-                    else {
-                         echo "Voce nao possui numeros informados!";
-                    }
+                    exibirArray($array);
                     echo PHP_EOL;
                     break;
                
@@ -153,20 +174,9 @@
                     break;
 
                case 12:
-                    $ind1 = 0;
-                    while ($ind1 < count($array)-1){
-                         $ind2 = $ind1 +1;
-                         while ($ind2 < count($array)){
-                              if($array[$ind2] < $array[$ind1]){
-                                   $aux2 = $array[$ind2];
-                                   $array[$ind2] = $array[$ind1];
-                                   $array[$ind1] = $aux2;
-                              }
-                              $ind2++;
-                         }
-                         $ind1++;
-                    }
-                    echo "Valores ordenados!\n";
+                    $array = swap($array, 0, 0);
+                    exibirArray($array);
+                    echo PHP_EOL;
                     break;
 
                case 0:
