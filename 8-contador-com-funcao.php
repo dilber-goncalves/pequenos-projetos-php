@@ -1,15 +1,8 @@
 <?php 
+     include "libs/funcoes-terminal.php";
 
      $fin = fopen("php://stdin", "r");
      $array = array();
-
-     function ler_input($texto, $fin){
-          echo $texto;
-          global $fin;
-          $input = fgets($fin);
-          $input = rtrim($input, "\n\r");
-          return $input;
-     }
 
      function exibirArray($array){
           $indice = 0;
@@ -25,14 +18,19 @@
           }
      }
 
-     function swap($array, $ind1, $ind2){
+     function swap(&$array, $item1, $item2){
+          $aux = $array[$item2];
+          $array[$item2] = $array[$item1];
+          $array[$item1] = $aux;
+     }
+
+     function selectionSort($array){
+          $ind1 = 0;
           while ($ind1 < count($array)-1){
                $ind2 = $ind1 +1;
                while ($ind2 < count($array)){
                     if($array[$ind2] < $array[$ind1]){
-                         $aux2 = $array[$ind2];
-                         $array[$ind2] = $array[$ind1];
-                         $array[$ind1] = $aux2;
+                         swap($array, $ind1, $ind2);
                     }
                     $ind2++;
                }
@@ -41,12 +39,13 @@
           return $array;
           echo "Valores ordenados!\n";
      }
-    
+
+         
     do {
-          echo PHP_EOL;
+          quebraLinha();
           echo "Escolha uma opção: ";
           echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[0]Sair\n";
-          echo PHP_EOL;
+          quebraLinha();
           echo "Opcao n: ";
           $opcao = fgets($fin);
           switch ($opcao) {
@@ -63,7 +62,7 @@
 
                case 2:
                     exibirArray($array);
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
                
                case 3: 
@@ -109,7 +108,7 @@
                               echo $array[$indice]." ";
                               $indice--;
                          }
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
 
                case 7:
@@ -120,7 +119,7 @@
                          $indice++;
                     }
                     echo "A soma dos valores do Array é igual a: ".$soma;
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
 
                case 8:
@@ -133,7 +132,7 @@
                          $indice++;
                     }
                     echo "O maior valor dentro do Array é: ".$maiorValor;
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
 
                case 9:
@@ -146,15 +145,15 @@
                          $indice++;
                     }
                     echo "O menor valor dentro do Array é: ".$menorValor;
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
                               
                case 10:
-                    $aux = $array[0];
-                    $array[0] = $array[1];
-                    $array[1] = $aux;
+                    swap($array, 0, 1);
                     echo "Posição 1 e 2 invertidos!";
-                    echo PHP_EOL;
+                    quebraLinha();
+                    exibirArray($array);
+                    quebraLinha();
                     break;
 
                case 11:
@@ -174,14 +173,14 @@
                     break;
 
                case 12:
-                    $array = swap($array, 0, 0);
+                    $array = selectionSort($array);
                     exibirArray($array);
-                    echo PHP_EOL;
+                    quebraLinha();
                     break;
 
                case 0:
                     echo "Até logo.";
-                    echo PHP_EOL;
+                    quebraLinha();
           }
      } while($opcao != 0);
 ?>
