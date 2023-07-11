@@ -40,11 +40,13 @@
           echo "Valores ordenados!\n";
      }
 
+     
+
          
     do {
           quebraLinha();
           echo "Escolha uma opção: ";
-          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[0]Sair\n";
+          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[13] Bubble Sort\n[0]Sair\n";
           quebraLinha();
           echo "Opcao n: ";
           $opcao = fgets($fin);
@@ -176,6 +178,21 @@
                     $array = selectionSort($array);
                     exibirArray($array);
                     quebraLinha();
+                    break;
+
+               case 13:
+                    $item1 = 0;
+                    $item2 = 1;
+                    do{
+                         if($array[$item1]>$array[$item2]){
+                         $aux = $array[$item2];
+                         $array[$item2] = $array[$item1];
+                         $array[$item1] = $aux;
+                         }
+                    $item2++;
+                    $item1++;
+                    }while($item1 != count($array)-1);
+                    echo "Numeros ordenados\n";
                     break;
 
                case 0:
