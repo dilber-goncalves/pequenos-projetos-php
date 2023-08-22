@@ -12,5 +12,4 @@ function ler_input($texto){
     $input = rtrim($input, "\n\r");
     return $input;
 }
-
 ?>

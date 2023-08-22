@@ -1,5 +1,6 @@
 <?php 
-     include "libs/funcoes-terminal.php";
+     include 'libs/funcoes-terminal.php';
+     include 'libs/merge-sort.php';
 
      $fin = fopen("php://stdin", "r");
      $array = array();
@@ -46,7 +47,7 @@
     do {
           quebraLinha();
           echo "Escolha uma opção: ";
-          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[13] Bubble Sort\n[0]Sair\n";
+          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[13] Bubble Sort\n[14] Merge Sort\n[0]Sair\n";
           quebraLinha();
           echo "Opcao n: ";
           $opcao = fgets($fin);
@@ -194,6 +195,10 @@
                     }while($item1 != count($array)-1);
                     echo "Numeros ordenados\n";
                     break;
+
+               case 14:
+                    $array = merge_sort($array, 0, count($array) -1);
+                    echo "Array ordenado via Merge Sort\n";
 
                case 0:
                     echo "Até logo.";
