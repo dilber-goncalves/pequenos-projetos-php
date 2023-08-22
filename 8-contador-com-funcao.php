@@ -1,13 +1,16 @@
 <?php 
      include 'libs/funcoes-terminal.php';
      include 'libs/merge-sort.php';
+     include 'libs/busca-binaria.php';
 
      $fin = fopen("php://stdin", "r");
      $array = array();
+     $arrayOrdenado = false;
 
      function exibirArray($array){
           $indice = 0;
           if (count($array)>0) { 
+               
                echo "Numeros no array: ";
                while ($indice < count($array)) {
                     echo $array[$indice]." ";
@@ -47,7 +50,7 @@
     do {
           quebraLinha();
           echo "Escolha uma opção: ";
-          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[13] Bubble Sort\n[14] Merge Sort\n[0]Sair\n";
+          echo "\n[1] Incluir números rand\n[2] Exibir números\n[3] Remover item do Array\n[4] Alterar valor\n[5] Encontrar número no Array\n[6] Exibir números em ordem inversa\n[7] Somar valores do Array\n[8] Exibir o maior valor\n[9] Exibir o menor valor\n[10] Inverter primeira posição com a segunda\n[11] Verificar se há valores repetidos no Array\n[12] Ordenar itens do Array\n[13] Bubble Sort\n[14] Merge Sort\n[15] Busca binaria\n[0]Sair\n";
           quebraLinha();
           echo "Opcao n: ";
           $opcao = fgets($fin);
@@ -56,11 +59,12 @@
                     $qtnum = ler_input ("Quantos numeros deseja criar?: ", $fin);
                     $qtJaAdd = 0;
                     while ($qtnum != $qtJaAdd) {
-                         $rand = rand(1,100);
+                         $rand = rand(1,10000);
                          $array[] = $rand;
                          $qtJaAdd = $qtJaAdd + 1;
                          echo "Número adicionado: $rand\n";
                     }
+                    $arrayOrdenado = false;
                     break;
 
                case 2:
@@ -83,6 +87,7 @@
                     $valorAlterado = ler_input("Qual o novo valor a ser inserido?: ", $fin);
                     $array[$altInd] = "$valorAlterado";
                     echo "Valor alterado com sucesso!\n";
+                    $arrayOrdenado = false;
                     break;
 
                case 5:
@@ -157,6 +162,7 @@
                     quebraLinha();
                     exibirArray($array);
                     quebraLinha();
+                    $arrayOrdenado = false;
                     break;
 
                case 11:
@@ -177,6 +183,7 @@
 
                case 12:
                     $array = selectionSort($array);
+                    $arrayOrdenado = true;
                     exibirArray($array);
                     quebraLinha();
                     break;
@@ -186,9 +193,9 @@
                     $item2 = 1;
                     do{
                          if($array[$item1]>$array[$item2]){
-                         $aux = $array[$item2];
-                         $array[$item2] = $array[$item1];
-                         $array[$item1] = $aux;
+                              $aux = $array[$item2];
+                              $array[$item2] = $array[$item1];
+                              $array[$item1] = $aux;
                          }
                     $item2++;
                     $item1++;
@@ -198,7 +205,23 @@
 
                case 14:
                     $array = merge_sort($array, 0, count($array) -1);
+                    $arrayOrdenado = true;
                     echo "Array ordenado via Merge Sort\n";
+                    break;
+
+               case 15:
+                    if ($arrayOrdenado){
+                         $valor = ler_input ("Qual numero deseja buscar?: ", $fin);
+                         $valorExiste = buscaBinaria($array, $valor);
+                         if($valorExiste){
+                              echo "O valor $valor está no array\n";
+                         }else{
+                              echo "O valor não está no array\n";
+                         }
+                    }else{
+                         echo "O array não está ordenado. Por favor, ordene o mesmo\n";
+                    }
+                    break;
 
                case 0:
                     echo "Até logo.";
