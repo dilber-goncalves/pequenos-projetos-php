@@ -41,9 +41,10 @@ function merge_sort(&$array, $posiIni, $posiFin){
         merge_sort($array, $meio+1, $posiFin);
         merge($array, $posiIni, $meio, $posiFin);
     }
+    return $array;
 }
 
-merge_sort($array, 0, count($array) -1);
+//merge_sort($array, 0, count($array) -1);
 
 /*$indice = 0;
 if (count($array) > 0) { 
