@@ -1,0 +1,36 @@
+<?php 
+class Cavalo {
+    private $cor="marrom"; 
+    public $nome;
+    public function getCor(){
+        return $this->cor;
+    }
+    public function setCor($cor){
+        $coresPermitidas = array("preto", "branco", "marrom",);
+        if (!in_array($cor, $coresPermitidas)){
+            echo "Cor inválida: $cor\n";
+            return;   
+        }
+        $this->cor=$cor;
+    }
+    public function imprimeCavalo(){
+        $terminal = new Terminal();
+        $terminal->writeln("Cavalo: $this->nome, cor: $this->cor");
+    }
+}
+
+$pegasus = new Cavalo();
+$pegasus->setCor("preto");
+$pegasus->nome="Pegasus";
+
+$valente = new Cavalo();
+$valente->nome="Valente";
+
+$pedepano = new Cavalo();
+$pedepano->setCor("marrom");
+$pedepano->nome="Pedepano";
+
+$valente->imprimeCavalo();
+$pegasus->imprimeCavalo();
+$pedepano->imprimeCavalo();
+?>
