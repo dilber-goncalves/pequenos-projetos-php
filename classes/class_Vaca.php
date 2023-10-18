@@ -1,10 +1,12 @@
 <?php 
+
 class Vaca {
     public $nome;
     public $cor;
     private $foiprobrejo;
 
-    public function chamar() {
+    public function chamarVaca() {
+        $this->random();
         if($this->foiprobrejo == true) {
             echo "Não é possível chamar... a ".$this->nome." foi pro brejo :( ";
         }else{
@@ -18,6 +20,15 @@ class Vaca {
 
     public function saiDoBrejo() {
         $this->foiprobrejo = false;
+    }
+
+    public function random() {
+        $valorRand = rand(1,50);
+        if ($valorRand < 25) {
+            $this->foiProBrejo();
+        }else{
+            $this->saiDoBrejo();
+        }
     }
 }
 ?>

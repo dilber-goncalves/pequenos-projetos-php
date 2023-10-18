@@ -6,6 +6,7 @@ class Cavalo {
     private $acordado;
 
     public function relinchar() {
+        $this->random();
         if ($this->acordado == true){
             echo "O cavalo está relinchando! iiirrrrí!!!";
         }else{
@@ -19,6 +20,15 @@ class Cavalo {
 
     public function dormindo(){
         $this->acordado = false;
+    }
+
+    public function random() {
+        $valorRand = rand(1,50);
+        if ($valorRand < 25) {
+            $this->dormindo();
+        }else{
+            $this->acordado();
+        }
     }
 }
 ?>

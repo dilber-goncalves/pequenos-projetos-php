@@ -65,5 +65,8 @@ $ovelha3->cor = "Cinza";
 $ovelha3->encontrada();
 $fazenda->addAnimal($ovelha3);
 
+echo PHP_EOL;
 $fazenda->exibirAnimais();
+echo PHP_EOL;
+$cavalo1->relinchar();
 ?>
